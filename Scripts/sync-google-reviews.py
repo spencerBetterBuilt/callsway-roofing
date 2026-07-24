@@ -14,6 +14,22 @@ import re
 import sys
 import urllib.request
 
+
+def load_dotenv(path=".env"):
+    """Minimal .env loader for local runs; GitHub Actions sets the real env var directly."""
+    if not os.path.exists(path):
+        return
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            os.environ.setdefault(key.strip(), value.strip())
+
+
+load_dotenv()
+
 PLACE_ID = "ChIJd3BWfBfERoYRM_uclTZe7EY"
 API_KEY = os.environ["GOOGLE_PLACES_API_KEY"]
 
@@ -79,9 +95,11 @@ def main():
     else:
         print("No changes — values already up to date.")
 
-    # Signal to the workflow whether there's anything to commit.
-    with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-        f.write(f"changed={'true' if changed else 'false'}\n")
+    # Signal to the workflow whether there's anything to commit (only set in CI).
+    github_output = os.environ.get("GITHUB_OUTPUT")
+    if github_output:
+        with open(github_output, "a") as f:
+            f.write(f"changed={'true' if changed else 'false'}\n")
 
 
 if __name__ == "__main__":
