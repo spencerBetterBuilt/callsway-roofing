@@ -1,0 +1,1038 @@
+/* =============================================================================
+   CALLSWAY ROOF CO. — GLOBAL STYLESHEET
+   styles.css
+
+   Table of Contents:
+   1.  Design Tokens (CSS Variables)
+   2.  Reset & Base
+   3.  Typography
+   4.  Layout
+   5.  Navigation
+   6.  Buttons
+   7.  Forms
+   8.  Cards
+   9.  Sections & Backgrounds
+   10. Testimonials
+   11. Trust Bar
+   12. Service Area Tags
+   13. Footer
+   14. Utilities
+   15. Responsive
+   ============================================================================= */
+
+
+/* =============================================================================
+   1. DESIGN TOKENS
+   ============================================================================= */
+
+:root {
+  /* --- Brand colors --- */
+  --cw-primary:       #02B08D;
+  --cw-primary-light: #E6F5F0;
+  --cw-primary-dark:  #028A6E;
+  --cw-dark:          #2D3A3A;
+  --cw-accent:        #C4703E;
+  --cw-accent-light:  #F5E6D8;
+  --cw-accent-dark:   #A85E32;
+
+  /* --- Neutrals --- */
+  --cw-cream:         #F5EDE3;
+  --cw-sand:          #D6CFC5;
+  --cw-white:         #FDFBF8;
+
+  /* --- Text --- */
+  --cw-text:          #3D3632;
+  --cw-text-muted:    #6B5D4F;
+
+  /* --- Borders & UI --- */
+  --cw-border:        #D6CFC5;
+  --cw-error:         #B84233;
+  --cw-success:       #02B08D;
+  --cw-warning:       #C4703E;
+
+  /* --- Typography --- */
+  --font-heading:     'Bitter', Georgia, serif;
+  --font-body:        'Work Sans', -apple-system, sans-serif;
+
+  /* --- Border radius scale --- */
+  --radius-sm:        4px;
+  --radius-md:        8px;
+  --radius-lg:        12px;
+
+  /* --- Spacing scale --- */
+  --space-xs:         4px;
+  --space-sm:         8px;
+  --space-md:         12px;
+  --space-default:    16px;
+  --space-lg:         24px;
+  --space-xl:         48px;
+  --space-2xl:        80px;
+
+  /* --- Shadows --- */
+  --shadow-sm:        0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md:        0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg:        0 8px 24px rgba(0, 0, 0, 0.10);
+
+  /* --- Layout --- */
+  --max-width:        1120px;
+  --nav-height:       72px;
+}
+
+
+/* =============================================================================
+   2. RESET & BASE
+   ============================================================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--cw-text);
+  background: var(--cw-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+
+::selection {
+  background: var(--cw-primary-light);
+  color: var(--cw-dark);
+}
+
+
+/* =============================================================================
+   3. TYPOGRAPHY
+   ============================================================================= */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--cw-dark);
+  line-height: 1.25;
+}
+
+h1 { font-size: 2.5rem; }   /* 40px */
+h2 { font-size: 1.75rem; }  /* 28px */
+h3 { font-size: 1.25rem; }  /* 20px */
+h4 { font-size: 1rem; }     /* 16px */
+
+p {
+  color: var(--cw-text-muted);
+  line-height: 1.65;
+}
+
+/* Overline / section label */
+.overline {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cw-primary);
+  margin-bottom: var(--space-md);
+  display: block;
+}
+
+/* Inline link style */
+.link {
+  color: var(--cw-primary);
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms;
+}
+
+.link:hover {
+  border-bottom-color: var(--cw-primary);
+}
+
+/* Arrow link — used in cards, service listings */
+.arrow-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cw-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 200ms;
+}
+
+.arrow-link:hover { gap: 10px; }
+
+.arrow-link::after {
+  content: '→';
+}
+
+/* Small / caption text */
+.text-sm { font-size: 0.85rem; }
+.text-xs { font-size: 0.75rem; }
+
+/* Muted text */
+.text-muted { color: var(--cw-text-muted); }
+
+
+/* =============================================================================
+   4. LAYOUT
+   ============================================================================= */
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.container--narrow {
+  max-width: 800px;
+}
+
+.container--wide {
+  max-width: 1280px;
+}
+
+/* Section spacing — use on <section> elements */
+.section {
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+/* Section header — centered overline + h2 + subtitle */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.section-header h2 {
+  margin-bottom: var(--space-sm);
+}
+
+.section-header p {
+  max-width: 540px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+}
+
+/* Two-column grid — content + image/form */
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Three-column grid — services, cards */
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-default);
+}
+
+
+/* =============================================================================
+   5. NAVIGATION
+   ============================================================================= */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--cw-dark);
+  transition: background 300ms ease, box-shadow 300ms ease;
+}
+
+.nav--scrolled {
+  box-shadow: var(--shadow-md);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-default) var(--space-lg);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.nav-logo img {
+  height: 40px;
+  filter: brightness(10);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--cw-sand);
+  transition: color 200ms;
+}
+
+.nav-links a:hover { color: #fff; }
+
+.nav-phone {
+  font-weight: 600;
+  color: #fff !important;
+}
+
+.nav-cta .btn {
+  padding: 10px 24px;
+  font-size: 0.85rem;
+}
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  margin: 5px 0;
+  border-radius: 1px;
+  transition: all 300ms ease;
+  transform-origin: center;
+}
+
+/* Hamburger → X animation */
+.nav-toggle.is-active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile menu (hidden by default, toggled via JS) */
+.nav-mobile {
+  display: none;
+  background: var(--cw-dark);
+  padding: var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-mobile.is-open {
+  display: block;
+}
+
+.nav-mobile a {
+  display: block;
+  padding: var(--space-md) 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--cw-sand);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nav-mobile a:last-child { border-bottom: none; }
+.nav-mobile a:hover { color: #fff; }
+
+.nav-mobile .btn {
+  margin-top: var(--space-sm);
+  border-bottom: none;
+  padding: var(--space-md) var(--space-lg);
+  color: #fff;
+}
+
+.nav-mobile .btn:hover {
+  color: #fff;
+}
+
+
+/* =============================================================================
+   6. BUTTONS
+   ============================================================================= */
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 14px 32px;
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 200ms ease;
+  display: inline-block;
+  text-align: center;
+  line-height: 1;
+}
+
+.btn:active { transform: translateY(1px); }
+
+/* Primary — green CTA */
+.btn-primary {
+  background: var(--cw-primary);
+  color: #fff;
+  border-color: var(--cw-primary);
+}
+.btn-primary:hover {
+  background: var(--cw-primary-dark);
+  border-color: var(--cw-primary-dark);
+}
+
+/* Secondary — outlined, for dark backgrounds */
+.btn-secondary {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+.btn-secondary:hover {
+  background: #fff;
+  color: var(--cw-dark);
+}
+
+/* Secondary on light backgrounds */
+.btn-secondary--dark {
+  color: var(--cw-dark);
+  border-color: var(--cw-dark);
+}
+.btn-secondary--dark:hover {
+  background: var(--cw-dark);
+  color: #fff;
+}
+
+/* Accent — terracotta, for warm CTAs */
+.btn-accent {
+  background: var(--cw-accent);
+  color: #fff;
+  border-color: var(--cw-accent);
+}
+.btn-accent:hover {
+  background: var(--cw-accent-dark);
+  border-color: var(--cw-accent-dark);
+}
+
+/* Ghost — subtle, for tertiary actions */
+.btn-ghost {
+  background: transparent;
+  color: var(--cw-primary);
+  border-color: var(--cw-border);
+}
+.btn-ghost:hover {
+  border-color: var(--cw-primary);
+}
+
+/* Small button variant */
+.btn-sm {
+  padding: 10px 20px;
+  font-size: 0.85rem;
+}
+
+/* Full-width */
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+
+/* =============================================================================
+   7. FORMS
+   ============================================================================= */
+
+.form-group {
+  margin-bottom: var(--space-default);
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--cw-text);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 10px 14px;
+  border: 1px solid var(--cw-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  color: var(--cw-text);
+  transition: border-color 200ms, box-shadow 200ms;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--cw-primary);
+  box-shadow: 0 0 0 3px var(--cw-primary-light);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--cw-sand);
+}
+
+/* Error state */
+.form-group--error input,
+.form-group--error select,
+.form-group--error textarea {
+  border-color: var(--cw-error);
+}
+
+.form-group--error .form-error {
+  font-size: 0.8rem;
+  color: var(--cw-error);
+  margin-top: 4px;
+}
+
+/* Form wrapper — gives a cream background card */
+.form-card {
+  background: var(--cw-cream);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  border: 1px solid var(--cw-border);
+}
+
+/* Inline submit feedback (see Scripts/form-handler.js) */
+.form-status {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.9rem;
+  display: none;
+}
+
+.form-status--success {
+  display: block;
+  color: var(--cw-success);
+}
+
+.form-status--error {
+  display: block;
+  color: var(--cw-error);
+}
+
+
+/* =============================================================================
+   8. CARDS
+   ============================================================================= */
+
+/* Base card */
+.card {
+  background: #fff;
+  border: 1px solid var(--cw-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: box-shadow 200ms, transform 200ms;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card-img {
+  height: 180px;
+  background: var(--cw-sand);
+  overflow: hidden;
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-body h3 {
+  margin-bottom: var(--space-sm);
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  margin-bottom: var(--space-default);
+}
+
+/* Card on cream background */
+.card--cream {
+  background: var(--cw-cream);
+}
+
+/* Card with no hover effect (static) */
+.card--static:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+
+/* =============================================================================
+   9. SECTIONS & BACKGROUNDS
+   ============================================================================= */
+
+/* Cream alternating section */
+.bg-cream  { background: var(--cw-cream); }
+.bg-white  { background: var(--cw-white); }
+
+/* Dark section — hero, about, footer */
+.bg-dark {
+  background: var(--cw-dark);
+  color: var(--cw-cream);
+}
+
+.bg-dark h1,
+.bg-dark h2,
+.bg-dark h3,
+.bg-dark h4 {
+  color: #fff;
+}
+
+.bg-dark p {
+  color: var(--cw-sand);
+}
+
+/* Subtle gradient overlay for dark sections */
+.bg-dark--gradient {
+  position: relative;
+}
+
+.bg-dark--gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  background: linear-gradient(135deg, transparent 40%, rgba(2, 176, 141, 0.06) 100%);
+  pointer-events: none;
+}
+
+/* Colored bottom edge — use on hero */
+.section--accent-edge::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cw-primary), var(--cw-accent), var(--cw-primary));
+  opacity: 0.6;
+}
+
+/* Section divider — top border */
+.section--bordered {
+  border-top: 1px solid var(--cw-border);
+}
+
+
+/* =============================================================================
+   10. TESTIMONIALS
+   ============================================================================= */
+
+.testimonial-card {
+  background: var(--cw-cream);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  border: 1px solid var(--cw-border);
+}
+
+.testimonial-stars {
+  color: var(--cw-accent);
+  font-size: 1rem;
+  margin-bottom: var(--space-default);
+  letter-spacing: 2px;
+}
+
+.testimonial-card blockquote {
+  font-size: 0.95rem;
+  color: var(--cw-text);
+  line-height: 1.65;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.testimonial-author {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--cw-dark);
+}
+
+.testimonial-location {
+  font-size: 0.8rem;
+  color: var(--cw-text-muted);
+}
+
+/* Google rating badge */
+.google-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--cw-text-muted);
+  font-weight: 500;
+}
+
+.google-rating strong {
+  color: var(--cw-dark);
+  font-size: 1.1rem;
+}
+
+
+/* =============================================================================
+   11. TRUST BAR
+   ============================================================================= */
+
+.trust-bar {
+  background: var(--cw-cream);
+  border-bottom: 1px solid var(--cw-border);
+  padding: 20px var(--space-lg);
+}
+
+.trust-bar-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--cw-text-muted);
+}
+
+.trust-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--cw-primary);
+  flex-shrink: 0;
+}
+
+
+/* =============================================================================
+   12. SERVICE AREA TAGS
+   ============================================================================= */
+
+.area-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.area-tag {
+  background: #fff;
+  border: 1px solid var(--cw-border);
+  border-radius: 100px;
+  padding: 10px 24px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--cw-text);
+  transition: all 200ms;
+}
+
+.area-tag:hover {
+  border-color: var(--cw-primary);
+  color: var(--cw-primary);
+}
+
+/* When used as links */
+a.area-tag:hover {
+  background: var(--cw-primary-light);
+}
+
+
+/* =============================================================================
+   13. FOOTER
+   ============================================================================= */
+
+.footer {
+  background: var(--cw-dark);
+  color: var(--cw-sand);
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 36px;
+}
+
+.footer-brand img {
+  height: 36px;
+  filter: brightness(10);
+  margin-bottom: var(--space-default);
+}
+
+.footer-brand p {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.footer-col h4 {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--space-default);
+}
+
+.footer-col li {
+  margin-bottom: var(--space-sm);
+}
+
+.footer-col a {
+  font-size: 0.85rem;
+  color: var(--cw-sand);
+  transition: color 200ms;
+}
+
+.footer-col a:hover { color: var(--cw-primary); }
+
+.footer-bottom {
+  max-width: var(--max-width);
+  margin: 36px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-default);
+}
+
+.footer-social a {
+  color: var(--cw-sand);
+  transition: color 200ms;
+}
+
+.footer-social a:hover { color: var(--cw-primary); }
+
+
+/* =============================================================================
+   14. UTILITIES
+   ============================================================================= */
+
+/* --- Display --- */
+.d-none           { display: none; }
+.d-block          { display: block; }
+.d-flex           { display: flex; }
+.d-grid           { display: grid; }
+.d-inline-block   { display: inline-block; }
+
+/* --- Flexbox --- */
+.flex-wrap        { flex-wrap: wrap; }
+.items-center     { align-items: center; }
+.items-start      { align-items: flex-start; }
+.justify-center   { justify-content: center; }
+.justify-between  { justify-content: space-between; }
+.flex-col         { flex-direction: column; }
+.gap-xs           { gap: var(--space-xs); }
+.gap-sm           { gap: var(--space-sm); }
+.gap-md           { gap: var(--space-md); }
+.gap-default      { gap: var(--space-default); }
+.gap-lg           { gap: var(--space-lg); }
+.gap-xl           { gap: var(--space-xl); }
+
+/* --- Text alignment --- */
+.text-center      { text-align: center; }
+.text-left        { text-align: left; }
+.text-right       { text-align: right; }
+
+/* --- Font weights --- */
+.fw-400           { font-weight: 400; }
+.fw-500           { font-weight: 500; }
+.fw-600           { font-weight: 600; }
+.fw-700           { font-weight: 700; }
+
+/* --- Colors (text) --- */
+.text-primary     { color: var(--cw-primary); }
+.text-accent      { color: var(--cw-accent); }
+.text-dark        { color: var(--cw-dark); }
+.text-white       { color: #fff; }
+.text-error       { color: var(--cw-error); }
+
+/* --- Spacing (margin) --- */
+.mt-0    { margin-top: 0; }
+.mt-xs   { margin-top: var(--space-xs); }
+.mt-sm   { margin-top: var(--space-sm); }
+.mt-md   { margin-top: var(--space-md); }
+.mt-default { margin-top: var(--space-default); }
+.mt-lg   { margin-top: var(--space-lg); }
+.mt-xl   { margin-top: var(--space-xl); }
+.mt-2xl  { margin-top: var(--space-2xl); }
+
+.mb-0    { margin-bottom: 0; }
+.mb-xs   { margin-bottom: var(--space-xs); }
+.mb-sm   { margin-bottom: var(--space-sm); }
+.mb-md   { margin-bottom: var(--space-md); }
+.mb-default { margin-bottom: var(--space-default); }
+.mb-lg   { margin-bottom: var(--space-lg); }
+.mb-xl   { margin-bottom: var(--space-xl); }
+.mb-2xl  { margin-bottom: var(--space-2xl); }
+
+/* --- Spacing (padding) --- */
+.p-sm    { padding: var(--space-sm); }
+.p-md    { padding: var(--space-md); }
+.p-default { padding: var(--space-default); }
+.p-lg    { padding: var(--space-lg); }
+.p-xl    { padding: var(--space-xl); }
+
+.py-lg   { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
+.py-xl   { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
+.py-2xl  { padding-top: var(--space-2xl); padding-bottom: var(--space-2xl); }
+
+.px-lg   { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+
+/* --- Width constraints --- */
+.max-w-narrow { max-width: 540px; }
+.max-w-content { max-width: 640px; }
+.max-w-wide   { max-width: 800px; }
+.mx-auto      { margin-left: auto; margin-right: auto; }
+
+/* --- Border radius --- */
+.rounded-sm   { border-radius: var(--radius-sm); }
+.rounded-md   { border-radius: var(--radius-md); }
+.rounded-lg   { border-radius: var(--radius-lg); }
+.rounded-full { border-radius: 100px; }
+
+/* --- Image utilities --- */
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-rounded {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* --- Visually hidden (accessible) --- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* =============================================================================
+   15. RESPONSIVE
+   ============================================================================= */
+
+@media (max-width: 900px) {
+  h1 { font-size: 2.2rem; }
+
+  .grid-2col {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .grid-3col {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .trust-bar-inner {
+    gap: var(--space-lg);
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --space-2xl: 56px;
+  }
+
+  h1 { font-size: 1.85rem; }
+  h2 { font-size: 1.5rem; }
+
+  .nav-links  { display: none; }
+  .nav-cta    { display: none; }
+  .nav-toggle { display: block; }
+
+  .trust-bar-inner {
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: flex-start;
+  }
+
+  .area-tags {
+    justify-content: flex-start;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  /* Stack buttons on mobile */
+  .btn-group--stack {
+    flex-direction: column;
+  }
+
+  .btn-group--stack .btn {
+    width: 100%;
+  }
+}
+
+/* Mobile-only visibility */
+@media (min-width: 601px) {
+  .mobile-only { display: none !important; }
+}
+
+@media (max-width: 600px) {
+  .desktop-only { display: none !important; }
+}
