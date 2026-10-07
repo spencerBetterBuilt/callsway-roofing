@@ -7,6 +7,7 @@
 
     var status = document.createElement('p');
     status.className = 'form-status';
+    status.setAttribute('role', 'status');
     form.appendChild(status);
 
     form.addEventListener('submit', function (event) {
@@ -28,7 +29,7 @@
           if (data.success) {
             form.reset();
             status.textContent =
-              "Thanks — we've received your request and will be in touch shortly.";
+              "Thanks. We got your request and will be in touch shortly.";
             status.classList.add('form-status--success');
           } else {
             throw new Error(data.message || 'Submission failed');
